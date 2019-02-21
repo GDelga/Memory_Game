@@ -15,6 +15,7 @@ MemoryGame = function(gs) {
 	var volteadas = 0;
 	var mensaje = "¡Empieza el Juego!";
 	var carta = null;
+	var idCarta;
 
 	this.initGame = function() {
 		var nombreCartas = ["8-ball",
@@ -59,27 +60,30 @@ MemoryGame = function(gs) {
 		volteadas++;
 		if(volteadas == 1) {
 			carta = tablero[cardId];
+			idCarta = cardId;
 		}
 		else if(volteadas == 2) {
 			volteadas = 0;
-			if(tablero[cardId].compareTo(carta) === true) {
-				carta.found();
-				tablero[cardId].found();
-				cartasEncontradas++;
-				if(cartasEncontradas == 8) mensaje = "¡Has ganado!";
-				else mensaje = "¡Has acertado!";
+			if(cardId != idCarta) {
+				if(tablero[cardId].compareTo(carta) === true) {
+					carta.found();
+					tablero[cardId].found();
+					cartasEncontradas++;
+					if(cartasEncontradas == 8) mensaje = "¡Has ganado!";
+					else mensaje = "¡Has acertado!";
+				}
+				else {
+					setTimeout(function(){
+						carta.flip();
+						tablero[cardId].flip();
+						mensaje = "¡Has fallado!"
+					},1000);
+				}
 			}
-			else {
-				setTimeout(function(){
-					carta.flip();
-					tablero[cardId].flip();
-					mensaje = "¡Has fallado!"
-				},1000);
-			}
+			else mensaje = "¡Sigue jugando!";
 		}
 	}
 };
-
 
 
 /**
