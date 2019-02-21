@@ -80,7 +80,7 @@ var CustomGraphicServer = function() {
 	 */
 	this.drawMessage = function(message) {
 		ctx.rect(0, 0, canvas.width, this.vOffset);
-		ctx.fillStyle = 'green';
+		ctx.fillStyle = 'purple';
 		ctx.fill();
 		ctx.fillText("", canvas.width/2, 30);
 		ctx.font = "30px Lobster";
